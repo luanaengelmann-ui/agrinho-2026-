@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agrinho 2026</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(#87CEEB,#7CFC00);
+    overflow:hidden;
+}
+
+h1{
+    text-align:center;
+    color:white;
+    margin-top:20px;
+    text-shadow:2px 2px 5px black;
+}
+
+p{
+    text-align:center;
+    color:white;
+}
+
+#imagem{
+    width:180px;
+    position:absolute;
+    left:100px;
+    top:180px;
+    cursor:grab;
+    user-select:none;
+}
+</style>
+
+</head>
+<body>
+
+<h1>Agrinho 2026</h1>
+<p>Arraste a imagem pela tela.</p>
+
+<img src="campo.png" id="imagem">
+
+<script>
+const img = document.getElementById("imagem");
+
+let segurando = false;
+let deslocX = 0;
+let deslocY = 0;
+
+img.addEventListener("pointerdown", (e)=>{
+    segurando = true;
+    deslocX = e.clientX - img.offsetLeft;
+    deslocY = e.clientY - img.offsetTop;
+    img.style.cursor = "grabbing";
+});
+
+document.addEventListener("pointermove", (e)=>{
+    if(!segurando) return;
+
+    img.style.left = (e.clientX - deslocX) + "px";
+    img.style.top = (e.clientY - deslocY) + "px";
+});
+
+document.addEventListener("pointerup", ()=>{
+    segurando = false;
+    img.style.cursor = "grab";
+});
+</script>
+
+</body>
+</html>
